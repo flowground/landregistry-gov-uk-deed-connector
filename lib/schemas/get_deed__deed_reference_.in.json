@@ -1,0 +1,9 @@
+{
+    "type": "object",
+    "properties": {
+        "deed_reference": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

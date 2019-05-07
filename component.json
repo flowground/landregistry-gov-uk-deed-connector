@@ -1,0 +1,68 @@
+{
+    "title": "Deed",
+    "description": "Land Registry Deed API",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/landregistry.gov.uk/deed/1.0.0/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://api.landregistry.gov.uk/v1",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "addDeed": {
+            "main": "./lib/actions/addDeed.js",
+            "title": "Deed",
+            "description": "The post Deed endpoint creates a new deed based on the JSON provided.\n The reponse will return a URL that can retrieve the created deed. \n > REQUIRED: Land Registry system requests Conveyancer to confirm that the Borrowers identity has been established in accordance with Section 111 of the Network Access Agreement.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/addDeed.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_deed__deed_reference_": {
+            "main": "./lib/actions/get_deed__deed_reference_.js",
+            "title": "Deed",
+            "description": "The Deed endpoint returns details of a specific deed based on the unique deed reference.\nThe response includes the Title Number, Property information, Borrower(s) information and deed information.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_deed__deed_reference_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
